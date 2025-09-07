@@ -26,7 +26,7 @@ SECRET_KEY = config("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.120']
+ALLOWED_HOSTS = ['192.168.1.120', 'localhost']
 
 
 # Application definition
@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'backend_nse.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-db = 'db'
+db = 'lite'
 
 if db == 'lite':
     DATABASES = {

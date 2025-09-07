@@ -5,7 +5,7 @@ class OptionChain(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     symbol = models.CharField(max_length=20)
     expiry_date = models.CharField(max_length=20)
-    
+    current_price = models.FloatField()
 
     # CE Columns
     CE_open_interest = models.BigIntegerField(default=0)

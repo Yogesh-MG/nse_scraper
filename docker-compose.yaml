@@ -43,7 +43,7 @@ services:
       - ./backend_nse:/app
       - static_data:/app/static
     command: >
-      sh -c "python manage.py migrate --noinput &&
+      sh -c "python manage.py makemigrations  &  python manage.py migrate --noinput &&
              python manage.py runserver 0.0.0.0:8000 & python manage.py scrape_nse_async"
     networks:
       - app-network

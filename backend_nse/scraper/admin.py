@@ -33,7 +33,7 @@ def export_to_csv(modeladmin, request, queryset):
 export_to_csv.short_description = "Export selected items to CSV"
 
 class customAdmin(admin.ModelAdmin):
-    list_display = ('timestamp', 'symbol','expiry_date','CE_open_interest','CE_change_in_oi','CE_last_price','CE_bid_qty','CE_bid_price',
+    list_display = ('timestamp', 'symbol', 'current_price','expiry_date','CE_open_interest','CE_change_in_oi','CE_last_price','CE_bid_qty','CE_bid_price',
                     'CE_ask_price','CE_ask_qty','strike_price','PE_open_interest','PE_change_in_oi','PE_last_price','PE_bid_qty','PE_bid_price',
                     'PE_ask_price','PE_ask_qty')
     list_filter = ('symbol','timestamp')

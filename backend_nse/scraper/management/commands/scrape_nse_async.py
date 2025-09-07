@@ -13,7 +13,7 @@ class Command(BaseCommand):
         while True:
             now = datetime.datetime.now()
             # Market hours: 9:14 → 15:10
-            if (now.hour == 9 and now.minute >= 14) or (10 <= now.hour <= 14) or (now.hour == 15 and now.minute <= 10):
+            if  comand:#(now.hour == 9 and now.minute >= 14) or (10 <= now.hour <= 14) or (now.hour == 15 and now.minute <= 10):
                 asyncio.run(scrape_all_symbols())
             else:
                 print(f"[{now}] Market closed, waiting...")

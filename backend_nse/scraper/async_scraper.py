@@ -53,6 +53,7 @@ async def store_data(symbol, data):
                     symbol=symbol,
                     expiry_date=expiryDate,
                     strike_price=strikePrice,
+                    current_price=ce_data.get("underlyingValue", 0),
                     CE_open_interest=ce_data.get("openInterest", 0),
                     CE_change_in_oi=ce_data.get("changeinOpenInterest", 0),
                     CE_last_price=ce_data.get("lastPrice", 0.0),
