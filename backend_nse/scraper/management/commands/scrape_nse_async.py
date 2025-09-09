@@ -16,7 +16,7 @@ class Command(BaseCommand):
             ist = pytz.timezone('Asia/Kolkata')
             now = datetime.now(ist)
             # Market hours: 9:14 → 15:10
-            if  (now.hour == 9 and now.minute >= 14) or (10 <= now.hour <= 14) or (now.hour == 15 and now.minute <= 10):
+            if  (now.hour == 9 and now.minute >= 14) or (10 <= now.hour <= 14) or (now.hour == 15 and now.minute <= 30):
                 asyncio.run(scrape_all_symbols())
             else:
                 print(f"[{now}] Market closed, waiting...")
