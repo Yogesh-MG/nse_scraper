@@ -2,6 +2,8 @@ from django.contrib import admin
 from .models import OptionChain
 import csv
 from django.http import HttpResponse
+from django.utils.formats import date_format
+from django.utils.timezone import localtime
 # Register your models here.
 
 
@@ -25,10 +27,11 @@ def export_to_csv(modeladmin, request, queryset):
     writer.writerow(field_names)  # header row
 
     for obj in queryset:
-        row = [str(getattr(obj, field)) for field in field_names]
-        writer.writerow(row)
+        timestamp = date_format(localtime(obj.timestamp), "DATETIME_FORMAT")
+        writer.writerow([obj.id, timestamp, obj.symbol, obj.price])
 
     return response
+
 
 export_to_csv.short_description = "Export selected items to CSV"
 
