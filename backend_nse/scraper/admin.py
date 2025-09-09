@@ -2,15 +2,12 @@ from django.contrib import admin
 from .models import OptionChain
 import csv
 from django.http import HttpResponse
-from django.utils.formats import date_format
 from django.utils.timezone import localtime
-# Register your models here.
-
-
+from django.utils.formats import date_format
 
 def export_to_csv(modeladmin, request, queryset):
     """
-    Custom admin action to export selected records to a CSV file.
+    Custom admin action to export selected records to a CSV file with localtime for DateTimeFields.
     """
     # Get model fields dynamically
     field_names = [field.name for field in modeladmin.model._meta.fields]
@@ -27,8 +24,16 @@ def export_to_csv(modeladmin, request, queryset):
     writer.writerow(field_names)  # header row
 
     for obj in queryset:
-        timestamp = date_format(localtime(obj.timestamp), "DATETIME_FORMAT")
-        writer.writerow([obj.id, timestamp, obj.symbol, obj.price])
+        row = []
+        for field in field_names:
+            value = getattr(obj, field)
+
+            # If it's a datetime field, convert to localtime & format like admin
+            if hasattr(value, "tzinfo"):
+                value = date_format(localtime(value), "DATETIME_FORMAT")
+
+            row.append(str(value))
+        writer.writerow(row)
 
     return response
 
